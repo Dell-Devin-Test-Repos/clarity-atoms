@@ -33,7 +33,7 @@ const base = css`
   cursor: pointer;
 
   background: transparent;
-  color: var(--ca-primary);
+  color: var(--ca-interactive-text);
 
   font-family: inherit;
   font-size: inherit;
@@ -51,21 +51,21 @@ export const minimal = css`
 const standard = css`
   ${base};
 
-  border-radius: 0.2rem;
-  padding: 0 1rem;
+  border-radius: var(--ca-radius-sm);
+  padding: 0 var(--ca-space-4);
 
   /* Clarity standard button height */
-  height: 36px;
-  line-height: 1;
+  height: var(--ca-control-height);
+  line-height: var(--ca-line-height-tight);
 
   border: none;
   outline: none;
 
-  font-weight: bold;
+  font-weight: var(--ca-font-weight-bold);
   white-space: nowrap;
 
   &[disabled] {
-    color: var(--ca-disabled);
+    color: var(--ca-text-disabled);
   }
 `;
 
@@ -74,14 +74,23 @@ const flat = css`
 
   background: transparent;
 
-  transition: all 120ms ease-out;
+  transition: all var(--ca-duration-fast) var(--ca-easing-standard);
 
   &:hover {
-    background: var(--ca-button-hover);
+    background: var(--ca-state-hover);
   }
 
   &:focus {
-    background: var(--ca-button-focus);
+    background: var(--ca-state-focus);
+  }
+
+  &:focus-visible {
+    outline: var(--ca-focus-ring-width) solid var(--ca-state-focus-ring);
+    outline-offset: var(--ca-focus-ring-width);
+  }
+
+  &:active {
+    background: var(--ca-state-active);
   }
 
   &:disabled {
@@ -92,25 +101,35 @@ const flat = css`
 const outline = css`
   ${standard};
 
-  border: 1px solid var(--ca-border);
+  border: var(--ca-border-width) solid var(--ca-border);
 
   background: transparent;
 
-  transition: all 120ms ease-out;
+  transition: all var(--ca-duration-fast) var(--ca-easing-standard);
 
   &:hover {
-    background: var(--ca-button-hover);
-    border-color: var(--ca-primary);
+    background: var(--ca-state-hover);
+    border-color: var(--ca-interactive);
   }
 
   &:focus {
-    background: var(--ca-button-focus);
-    border-color: var(--ca-primary);
+    background: var(--ca-state-focus);
+    border-color: var(--ca-interactive);
+  }
+
+  &:focus-visible {
+    outline: var(--ca-focus-ring-width) solid var(--ca-state-focus-ring);
+    outline-offset: var(--ca-focus-ring-width);
+  }
+
+  &:active {
+    background: var(--ca-state-active);
+    border-color: var(--ca-interactive-active);
   }
 
   &:disabled,
   &[aria-disabled='true'] {
-    border-color: var(--ca-disabled-light);
+    border-color: var(--ca-state-disabled);
     background-color: transparent;
   }
 `;
@@ -120,20 +139,30 @@ const outline = css`
 const solid = css`
   ${standard};
 
-  background-color: var(--ca-primary);
-  color: var(--ca-primary-comp);
+  background-color: var(--ca-interactive);
+  color: var(--ca-text-on-interactive);
 
   &:hover {
-    background-color: var(--ca-primary-semilight);
+    background-color: var(--ca-interactive-hover);
   }
 
   &:focus {
-    background-color: var(--ca-primary-light);
+    background-color: var(--ca-interactive-hover);
+  }
+
+  &:focus-visible {
+    outline: var(--ca-focus-ring-width) solid var(--ca-state-focus-ring);
+    outline-offset: var(--ca-focus-ring-width);
+  }
+
+  &:active {
+    background-color: var(--ca-interactive-active);
   }
 
   &:disabled,
   &[aria-disabled='true'] {
-    background-color: var(--ca-disabled-light);
+    background-color: var(--ca-state-disabled-subtle);
+    color: var(--ca-text-disabled);
   }
 `;
 
@@ -141,7 +170,7 @@ const styles = { flat, outline, minimal, solid };
 
 const compactStyle = css`
   /* Clarity compact button height */
-  height: 24px;
+  height: var(--ca-control-height-compact);
 `;
 
 

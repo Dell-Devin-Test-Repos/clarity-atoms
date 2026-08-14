@@ -85,9 +85,9 @@ const dateStyle = css`
     ${disabledStyle};
 
     &.selected {
-      color: var(--ca-primary-comp);
-      background-color: var(--ca-disabled);
-      border-color: var(--ca-disabled);
+      color: var(--ca-text-on-interactive);
+      background-color: var(--ca-state-disabled);
+      border-color: var(--ca-state-disabled);
     }
   }
 `;

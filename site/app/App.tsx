@@ -73,8 +73,8 @@ const routerStyle = css`
 
   box-sizing: border-box;
 
-  border-left: 1px solid #F8F8F8;
-  border-right: 1px solid #F8F8F8;
+  border-left: var(--ca-border-width) solid var(--ca-border-subtle);
+  border-right: var(--ca-border-width) solid var(--ca-border-subtle);
 `;
 
 const components = {

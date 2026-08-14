@@ -2,15 +2,15 @@ import { css } from '@emotion/css';
 
 
 export const focusStyle = css`
-  border-color: var(--ca-primary);
+  border-color: var(--ca-interactive);
 `;
 
 export const borderStyle = css`
-  border: 1px solid transparent;
-  transition: border-color 150ms ease-out;
+  border: var(--ca-border-width) solid transparent;
+  transition: border-color var(--ca-duration-normal) var(--ca-easing-standard);
 
   &:hover {
-    border-color: var(--ca-border-hover);
+    border-color: var(--ca-border-strong);
   }
 
   &:focus {
@@ -19,30 +19,30 @@ export const borderStyle = css`
 `;
 
 export const hoverStyle = css`
-  border-color: var(--ca-border-hover);
+  border-color: var(--ca-border-strong);
 `;
 
 export const disabledStyle = css`
   cursor: default;
 
-  color: var(--ca-disabled);
+  color: var(--ca-text-disabled);
   border-color: transparent;
 
   &:focus {
-    border-color: var(--ca-disabled);
+    border-color: var(--ca-state-disabled);
   }
 `;
 
 export const selectedStyle = css`
-  color: var(--ca-primary-comp);
-  background-color: var(--ca-primary);
+  color: var(--ca-text-on-interactive);
+  background-color: var(--ca-interactive);
 `;
 
 export const currentStyle = css`
   position: relative;
 
-  color: var(--ca-primary);
-  font-weight: 500;
+  color: var(--ca-interactive-text);
+  font-weight: var(--ca-font-weight-medium);
 
   &::after {
     content: '';

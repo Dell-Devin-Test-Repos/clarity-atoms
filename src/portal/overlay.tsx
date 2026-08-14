@@ -18,5 +18,5 @@ export const transparentOverlay = css`
 
 export const darkOverlay = css`
   ${overlayBase};
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: var(--ca-surface-overlay);
 `;

@@ -1,18 +1,10 @@
 import { h, render } from 'preact';
 
-import { setupTheme, Theme } from '../src/Theme';
+import { installThemes } from '../src/theme';
 
 import { App } from './app/App';
+import { restoreTheme } from './components/ThemeSwitcher';
 
-
-const theme: Theme = {
-  primary: '#0076CE',
-  primaryComp: '#FFFFFF',
-  border: '#CCCCCC',
-  borderLight: '#E0E0E0',
-  disabled: '#CCCCCC',
-  disabledLight: '#EEEEEE'
-};
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -20,8 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.body.appendChild(rootElm);
 
-  // Setup the Theme
-  setupTheme(theme);
+  // Emit tokens for every theme, then apply the visitor's preference.
+  installThemes();
+  restoreTheme();
 
   // Render Site App
   render(h(App, null), rootElm);

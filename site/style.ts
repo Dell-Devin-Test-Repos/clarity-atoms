@@ -15,9 +15,10 @@ injectGlobal`
     margin: 0;
     padding: 0;
 
-    color: #444444;
+    background: var(--ca-surface);
+    color: var(--ca-text-primary);
 
-    line-height: 1.5;
+    line-height: var(--ca-line-height-normal);
 
     font-family: 'Fira Sans', sans-serif;
     font-size: 16px;
@@ -54,10 +55,10 @@ injectGlobal`
     margin: 1rem 0 1.5rem;
     padding: 0.5rem;
 
-    border-left: 4px solid #CCCCCC;
+    border-left: 4px solid var(--ca-border);
 
-    background: #FAFAFA;
-    color: #777;
+    background: var(--ca-surface-sunken);
+    color: var(--ca-text-secondary);
     font-weight: 500;
     font-style: italic;
     letter-spacing: 0.2px;

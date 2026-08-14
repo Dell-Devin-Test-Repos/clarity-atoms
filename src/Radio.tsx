@@ -33,16 +33,18 @@ export const radioStyles = css`
   input {
     cursor: pointer;
     margin-right: 0;
+
+    accent-color: var(--ca-interactive);
   }
 
   label {
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 var(--ca-space-2);
     cursor: pointer;
   }
 `;
 
 export const radioDisabledStyles = css`
-  color: #BBBBBB;
+  color: var(--ca-text-disabled);
 `;
 
 export function Radio<T>(props: RadioProps<T>) {

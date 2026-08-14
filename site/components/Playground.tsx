@@ -12,8 +12,10 @@ export interface PlaygroundProps {
 }
 
 const rootStyle = css`
-  border: 1px solid rgba(41, 45, 62, 0.1);
+  border: var(--ca-border-width) solid var(--ca-border-subtle);
   padding: 1rem;
+
+  background: var(--ca-surface);
 
   overflow-x: auto;
 `;
