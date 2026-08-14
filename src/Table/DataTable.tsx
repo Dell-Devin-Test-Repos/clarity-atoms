@@ -227,7 +227,7 @@ export function DataTable<T>(props: DataTableProps<T>) {
                           !direction && sortIconIdleStyle,
                           direction === 'asc' && sortIconAscStyle,
                           direction === 'desc' && sortIconDescStyle)} />
-                        {multiSort && order > 0
+                        {multiSort && order >= 0 && sorting.sort.length > 1
                           ? <span class={sortOrderStyle}>{order + 1}</span>
                           : null}
                         <span class={srOnlyStyle}>

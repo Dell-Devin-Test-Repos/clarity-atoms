@@ -170,11 +170,11 @@ const arrowStyle = css`
   height: 12px;
 
   fill: currentColor;
-  transform: rotateZ(90deg);
+  transform: rotateZ(-90deg);
 `;
 
 const arrowNextStyle = css`
-  transform: rotateZ(-90deg);
+  transform: rotateZ(90deg);
 `;
 
 
