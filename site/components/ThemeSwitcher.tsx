@@ -1,6 +1,6 @@
 import { css, cx } from '@emotion/css';
 
-import { setTheme, ThemePreference, useTheme } from '../../src/theme';
+import { prefersDark, setTheme, ThemePreference, useTheme } from '../../src/theme';
 
 
 export interface ThemeSwitcherProps {
@@ -67,7 +67,10 @@ const selectedStyle = css`
 
 export function ThemeSwitcher(props: ThemeSwitcherProps) {
 
-  const { preference, theme } = useTheme();
+  const { preference } = useTheme();
+
+  // Describe what the OS asks for, regardless of the current preference.
+  const systemTheme = prefersDark() ? 'dark' : 'light';
 
   const onSelect = (value: ThemePreference) => {
     window.localStorage.setItem(storageKey, value);
@@ -79,7 +82,7 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
       {options.map((x) => (
         <button type='button' class={cx(buttonStyle, preference === x.value && selectedStyle)}
           aria-pressed={preference === x.value}
-          title={x.value === 'auto' ? `Follow system (${theme})` : `${x.label} theme`}
+          title={x.value === 'auto' ? `Follow system (${systemTheme})` : `${x.label} theme`}
           onClick={() => onSelect(x.value)}>
             {x.label}
         </button>
