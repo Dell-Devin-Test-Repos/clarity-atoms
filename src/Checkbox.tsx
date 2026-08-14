@@ -1,6 +1,6 @@
 import { cx, css } from '@emotion/css';
 import { ComponentChildren } from 'preact';
-import { useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 
 import { SVGIcon } from './icons/SVGIcon';
 
@@ -30,6 +30,9 @@ let checkboxCounter = 0;
 export type CheckboxProps<T> = Partial<{
   class: string;
   checked: boolean;
+  /** Renders the mixed state, used when the checkbox summarises a set of children. */
+  indeterminate: boolean;
+  ariaLabel: string;
   children: ComponentChildren | ComponentChildren[];
   id: string;
   name: string;
@@ -45,11 +48,22 @@ export function Checkbox<T>(props: CheckboxProps<T>) {
   const [autoId, _] = useState(() => `cwc_checkbox_${checkboxCounter++}`);
   const formFieldId = props.id || autoId;
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // The mixed state exists only as a DOM property.
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.indeterminate = !!props.indeterminate;
+    }
+  }, [props.indeterminate, props.checked]);
+
   const onChange = () => props.onChange && props.onChange(!props.checked);
 
   return (
     <div class={cx('cwc-checkbox', checkboxStyles, props.disabled && checkboxDisabledStyles, props.class)}>
-      <input type='checkbox' id={formFieldId} name={props.name} checked={props.checked} onChange={onChange} disabled={props.disabled} />
+      <input ref={inputRef} type='checkbox' id={formFieldId} name={props.name} checked={props.checked}
+        aria-label={props.ariaLabel} aria-checked={props.indeterminate ? 'mixed' : undefined}
+        onChange={onChange} disabled={props.disabled} />
       { props.children
         ? <label for={formFieldId}>{props.children}</label>
         : null }

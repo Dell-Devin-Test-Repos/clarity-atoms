@@ -1,0 +1,54 @@
+import { LargeTable } from './LargeTable';
+import { ServerTable } from './ServerTable';
+
+# Data Table
+
+Data Table presents records in rows and columns so users can scan, compare, sort and act on
+many items at once. It renders real `<table>` markup, which keeps the data readable for
+screen readers and lets browsers handle column alignment natively.
+
+## UX Principles
+
+### Show the columns that support the decision
+Every column costs horizontal space and attention. Keep the columns a user needs to make a
+choice and move the rest to a detail view.
+
+### Sort on the values users compare
+Mark a column sortable when its ordering is meaningful - names, timestamps, utilization.
+Headers are buttons, so sorting works with keyboard and assistive technology, and the sort
+direction is published through `aria-sort`.
+
+### Make selection state obvious
+When rows can be acted upon in bulk, use multi selection. The header checkbox reports a mixed
+state while only part of the page is selected, so users can tell selection is partial.
+
+### Keep the table honest while it loads
+Use the loading state instead of an empty table, and an explicit empty state instead of a
+table with only a header.
+
+## Sortable, selectable and paginated
+
+Sorting, selection and pagination are separate, controlled concerns. The table sorts the rows
+it receives, while the page slice is owned by the consumer - the same rows can equally come
+from a server.
+
+<Playground Component={ServerTable} />
+
+## Multi column sorting
+
+Set `multiSort` and shift-click a second header to add it to the sort. The ordinal next to the
+sort arrow shows the precedence of each column.
+
+## Large datasets
+
+Set `virtualized` with a fixed `rowHeight` and a `height` for the scroll container. Only the
+rows inside the viewport, plus an overscan buffer, exist in the DOM.
+
+<Playground Component={LargeTable} />
+
+## Accessibility
+
+- Column headers use `scope='col'` and sortable headers expose `aria-sort`.
+- Sort controls are real buttons, so they are reachable with `Tab` and activated with `Enter` or `Space`.
+- Selection checkboxes carry an accessible name derived from the `labels` prop.
+- The table publishes `aria-rowcount`, and rows their `aria-rowindex`, which stays correct while virtualized.

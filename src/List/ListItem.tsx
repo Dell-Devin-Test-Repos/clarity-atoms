@@ -7,6 +7,11 @@ export interface ListItemProps<T> {
   class?: string;
   mode?: 'single' | 'multiselect';
 
+  /** DOM id, required when the item takes part in `aria-activedescendant` wiring. */
+  id?: string;
+  /** ARIA role of the item, e.g. `option` within a listbox. */
+  role?: string;
+
   context: T;
   selected?: boolean;
   disabled?: boolean;
@@ -49,7 +54,7 @@ const listItemStyle = css`
 
 export function ListItem<T>(props: ListItemProps<T>) {
 
-  const { mode, context, children, disabled, focused, selected, onRemove, onSelect } = props;
+  const { mode, role, context, children, disabled, focused, selected, onRemove, onSelect } = props;
 
   const elmRef = useRef<HTMLDivElement>(null);
 
@@ -82,7 +87,9 @@ export function ListItem<T>(props: ListItemProps<T>) {
     props.class);
 
   return (
-    <div class={classes} onClick={onClick} tabIndex={-1} ref={elmRef}>
+    <div class={classes} id={props.id} role={role} onClick={onClick} tabIndex={-1} ref={elmRef}
+      aria-selected={role === 'option' ? (selected ? 'true' : 'false') : undefined}
+      aria-disabled={disabled ? 'true' : undefined}>
       {children}
     </div>
   );

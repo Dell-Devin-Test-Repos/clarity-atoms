@@ -4,9 +4,12 @@ import Router from 'preact-router';
 import ButtonDocs from '../pages/Button/Button.mdx';
 import CalendarDocs from '../pages/DateTime/Calendar.mdx';
 import CheckboxDocs from '../pages/Checkbox/Checkbox.mdx';
+import ComboboxDocs from '../pages/Combobox/Combobox.mdx';
+import DataTableDocs from '../pages/DataTable/DataTable.mdx';
 import DatePickerDocs from '../pages/DateTime/DatePicker.mdx';
 import DialogDocs from '../pages/Dialog/Dialog.mdx';
 import DropdownDocs from '../pages/Dropdown/Dropdown.mdx';
+import PaginationDocs from '../pages/Pagination/Pagination.mdx';
 import RadioDocs from '../pages/Radio/Radio.mdx';
 import SimpleSelectDocs from '../pages/SimpleSelect/SimpleSelect.mdx';
 
@@ -31,9 +34,12 @@ export function AppRouter(props: AppRouterProps) {
         <ButtonDocs path='/button' />
         <CalendarDocs path='/calendar' />
         <CheckboxDocs path='/checkbox' />
+        <ComboboxDocs path='/combobox' />
+        <DataTableDocs path='/data-table' />
         <DatePickerDocs path='/datepicker' />
         <DialogDocs path='/dialog' />
         <DropdownDocs path='/dropdown' />
+        <PaginationDocs path='/pagination' />
         <RadioDocs path='/radio' />
         <SimpleSelectDocs path='/simple-select' />
       </Router>

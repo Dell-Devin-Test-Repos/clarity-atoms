@@ -1,0 +1,32 @@
+import { PaginationExample } from './PaginationExample';
+
+# Pagination
+
+Pagination splits a long result set into pages and tells users where they are within it.
+It is fully controlled - the page and page size live with the consumer, which makes it
+composable with `DataTable` and with server driven data.
+
+## UX Principles
+
+### Report the position, not just the controls
+The range summary - `1 - 25 of 1042` - answers "how much is left?" before the user clicks
+anything.
+
+### Truncate long page ranges predictably
+Keep the first and last pages plus the neighbours of the current page visible, and collapse
+the rest into an ellipsis so the control stays a single line.
+
+### Let users change the page size
+Reading 100 rows at a time is faster for some tasks and overwhelming for others. When the page
+size changes, return the user to the first page so their position stays meaningful.
+
+## Example
+
+<Playground Component={PaginationExample} />
+
+## Accessibility
+
+- The control is a `nav` with an accessible name, so it is listed as a landmark.
+- Page buttons are labelled `Page n`, and the active one carries `aria-current='page'`.
+- Previous and next buttons keep their labels while disabled, so their purpose is never lost.
+- Ellipses are inert text and are not focusable.

@@ -11,7 +11,15 @@ export interface Theme {
 
   disabled: string;
   disabledLight: string;
+
+  /** Text colour of secondary content - captions, status text, placeholders. */
+  textSecondary?: string;
+  /** Colour used to report a failure, e.g. options which could not be loaded. */
+  error?: string;
 }
+
+const defaultTextSecondary = '#666666';
+const defaultError = '#CE1126';
 
 export function setupTheme(theme: Theme) {
 
@@ -23,6 +31,11 @@ export function setupTheme(theme: Theme) {
 
   const primaryHover = primary.alpha(0.08).string();
   const primaryFocus = primary.alpha(0.16).string();
+
+  const borderLight = Color(x.borderLight);
+
+  const textSecondary = x.textSecondary ?? defaultTextSecondary;
+  const error = x.error ?? defaultError;
 
   injectGlobal`
     :root {
@@ -37,6 +50,9 @@ export function setupTheme(theme: Theme) {
       --ca-disabled: ${x.disabled};
       --ca-disabled-light: ${x.disabledLight};
 
+      --ca-text-secondary: ${textSecondary};
+      --ca-error: ${error};
+
       /* Specific styling for components */
 
       /* Styling for button components */
@@ -45,6 +61,16 @@ export function setupTheme(theme: Theme) {
 
       /* Styling for DatePicker */
       --ca-border-hover: ${Color(x.border).lighten(0.18).string()};
+
+      /* Styling for DataTable */
+      --ca-table-header: ${borderLight.lighten(0.1).string()};
+      --ca-table-stripe: ${borderLight.lighten(0.13).string()};
+      --ca-table-row-hover: ${primary.alpha(0.04).string()};
+      --ca-table-row-selected: ${primary.alpha(0.1).string()};
+
+      /* Styling for Combobox chips */
+      --ca-chip-background: ${primary.alpha(0.12).string()};
+      --ca-chip-text: ${x.primary};
     }
   `;
 

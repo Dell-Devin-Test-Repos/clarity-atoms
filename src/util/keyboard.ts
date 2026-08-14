@@ -8,6 +8,7 @@ export interface KeyboardHandlerProps {
   ArrowLeft?: (e: KeyboardEvent) => void;
   ArrowRight?: (e: KeyboardEvent) => void;
   Escape?: (e: KeyboardEvent) => void;
+  Backspace?: (e: KeyboardEvent) => void;
   CatchAll?: (e: KeyboardEvent) => void;
 }
 

@@ -1,0 +1,57 @@
+import { AsyncComboboxExample } from './AsyncComboboxExample';
+import { ComboboxExample } from './ComboboxExample';
+
+# Combobox
+
+Combobox is a select with an editable input. Users type to narrow a list that is too long to
+scan, which makes it the right control when the set of options is large, remote, or unknown to
+the user up front.
+
+## UX Principles
+
+### Use it when the list is long
+Below roughly seven options a Simple Select is faster, because there is nothing to search.
+
+### Keep typing and choosing in one place
+The input holds the query and, once a choice is made, the label of the selection. Users never
+have to leave the field to correct themselves.
+
+### Report what the list is doing
+While options are being fetched, say so. When nothing matches, say that instead of showing an
+empty surface, and when a fetch fails, offer a way to try again.
+
+### Prefer chips for multiple values
+Multiple selections stay visible as chips inside the field, each removable, so the current
+answer is never hidden behind a count.
+
+## Filtering
+
+Filtering is owned by the consumer - the component renders the options it is given. That keeps
+client side filtering and server side search on the same API.
+
+<Playground Component={ComboboxExample} />
+
+## Async options with multi select
+
+`useAsyncOptions` debounces the query and applies only the response of the latest one, so a slow
+earlier request cannot overwrite fresher results. Loading, error and no-results states are
+rendered by the combobox.
+
+<Playground Component={AsyncComboboxExample} />
+
+## Keyboard
+
+| Key | Behaviour |
+| --- | --- |
+| `ArrowDown` / `ArrowUp` | Open the surface, then move the highlighted option |
+| `Enter` | Select the highlighted option |
+| `Escape` | Close the surface |
+| `Backspace` | With an empty query, remove the last selected chip |
+| `Tab` | Close the surface and move on |
+
+## Accessibility
+
+- The input is a `role='combobox'` with `aria-expanded`, `aria-controls` and `aria-autocomplete='list'`.
+- The highlighted option is published through `aria-activedescendant`, so focus never leaves the input.
+- Options are `role='option'` inside a `role='listbox'` and report `aria-selected`.
+- Chip remove buttons are labelled with the value they remove.
