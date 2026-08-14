@@ -35,9 +35,12 @@ export function AppNav(props: AppNavProps) {
         <NavItem href='/button'>Button</NavItem>
         <NavItem href='/calendar'>Calendar</NavItem>
         <NavItem href='/checkbox'>Checkbox</NavItem>
+        <NavItem href='/combobox'>Combobox</NavItem>
+        <NavItem href='/data-table'>Data Table</NavItem>
         <NavItem href='/datepicker'>Date Picker</NavItem>
         <NavItem href='/dialog'>Dialog</NavItem>
         <NavItem href='/dropdown'>Dropdown</NavItem>
+        <NavItem href='/pagination'>Pagination</NavItem>
         <NavItem href='/radio'>Radio</NavItem>
         <NavItem href='/simple-select'>Simple Select</NavItem>
       </ul>
