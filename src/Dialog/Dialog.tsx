@@ -23,8 +23,9 @@ export interface DialogProps {
 const rootStyle = css`
   position: fixed;
 
-  background: #FFFFFF;
-  box-shadow: 0 0 6px 0 rgba(20, 20, 20, 0.2);
+  background: var(--ca-surface-raised);
+  color: var(--ca-text-primary);
+  box-shadow: var(--ca-elevation-2);
   outline: none;
 
   overflow: auto;
@@ -104,13 +105,13 @@ const headerStyle = css`
   align-items: center;
   justify-content: space-between;
 
-  padding: 1.5rem 1.5rem;
+  padding: var(--ca-space-5) var(--ca-space-5);
 `;
 
 const headingStyle = css`
   margin: 0;
 
-  font-size: 1.5rem;
+  font-size: var(--ca-font-size-xl);
 `;
 
 const buttonStyle = css`
@@ -142,7 +143,7 @@ interface SectionProps {
 }
 
 const sectionStyle = css`
-  padding: 0 1.5rem 1rem;
+  padding: 0 var(--ca-space-5) var(--ca-space-4);
 `;
 
 function Section(props: SectionProps) {

@@ -12,7 +12,7 @@ const headingStyle = css`
   margin: 0.25rem 0.5rem;
   padding: 0.5rem;
 
-  color: #777777;
+  color: var(--ca-text-secondary);
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;

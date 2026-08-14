@@ -67,7 +67,7 @@ export interface SurfaceProps {
 
 
 const overlayStyle = css`
-  background-color: rgba(0, 0, 0, 0.015);
+  background-color: transparent;
 `;
 
 

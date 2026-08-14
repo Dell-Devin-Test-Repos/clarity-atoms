@@ -17,7 +17,7 @@ const rootStyle = css`
 
 const boxStyle = css`
   padding: 2rem;
-  background-color: #F8F8F8;
+  background-color: var(--ca-surface-sunken);
   border: 1px solid ${border};
 `;
 

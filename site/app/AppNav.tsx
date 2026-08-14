@@ -2,8 +2,6 @@ import { css, cx } from '@emotion/css';
 import { ComponentChildren } from 'preact';
 import { Link } from 'preact-router/match';
 
-import { border, borderSecondary, primary } from '../../src/color';
-
 
 export interface AppNavProps {
   class?: string;
@@ -11,7 +9,7 @@ export interface AppNavProps {
 
 
 const rootStyle = css`
-  background-color: #FAFAFA;
+  background-color: var(--ca-surface-sunken);
 
   z-index: 1;
 `;
@@ -40,6 +38,7 @@ export function AppNav(props: AppNavProps) {
         <NavItem href='/dropdown'>Dropdown</NavItem>
         <NavItem href='/radio'>Radio</NavItem>
         <NavItem href='/simple-select'>Simple Select</NavItem>
+        <NavItem href='/tokens'>Design Tokens</NavItem>
       </ul>
     </nav>
   );
@@ -62,24 +61,24 @@ const linkStyle = css`
 
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-  border-bottom: 1px solid ${borderSecondary};
+  border-bottom: var(--ca-border-width) solid var(--ca-border-subtle);
 
-  transition: all 120ms ease-out;
+  transition: all var(--ca-duration-fast) var(--ca-easing-standard);
 
-  color: #444444;
+  color: var(--ca-text-primary);
 
   &:hover {
-    background: #F0F0F0;
+    background: var(--ca-state-hover);
 
-    border-color: ${border};
-    color: #666666;
+    border-color: var(--ca-border);
+    color: var(--ca-text-secondary);
   }
 `;
 
 const activeLinkStyle = css`
-  color: ${primary};
+  color: var(--ca-interactive-text);
 
-  border-color: ${primary};
+  border-color: var(--ca-interactive);
 `;
 
 

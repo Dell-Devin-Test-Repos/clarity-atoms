@@ -53,11 +53,11 @@ const inlineRootStyle = css`
   padding: 0 0.2rem;
 
   border-radius: 0.25rem;
-  border: 1px solid rgba(41, 45, 62, 0.2);
+  border: var(--ca-border-width) solid var(--ca-border-subtle);
 
   line-height: 1.125;
 
-  background: #F0F0F0;
+  background: var(--ca-surface-sunken);
 `;
 
 

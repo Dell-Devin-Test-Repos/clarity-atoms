@@ -9,6 +9,7 @@ import DialogDocs from '../pages/Dialog/Dialog.mdx';
 import DropdownDocs from '../pages/Dropdown/Dropdown.mdx';
 import RadioDocs from '../pages/Radio/Radio.mdx';
 import SimpleSelectDocs from '../pages/SimpleSelect/SimpleSelect.mdx';
+import TokensDocs from '../pages/Tokens/Tokens.mdx';
 
 import { Home } from './Home';
 
@@ -36,6 +37,7 @@ export function AppRouter(props: AppRouterProps) {
         <DropdownDocs path='/dropdown' />
         <RadioDocs path='/radio' />
         <SimpleSelectDocs path='/simple-select' />
+        <TokensDocs path='/tokens' />
       </Router>
     </div>
   );

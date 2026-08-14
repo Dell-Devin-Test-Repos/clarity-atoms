@@ -31,12 +31,18 @@ const listItemStyle = css`
 
   flex-direction: row;
 
-  transition: all 120ms ease-out;
+  transition: all var(--ca-duration-fast) var(--ca-easing-standard);
   outline: none;
+
+  color: var(--ca-text-primary);
 
   &.${focusedName},
   &:hover {
-    background-color: #F0F0F0;
+    background-color: var(--ca-state-hover);
+  }
+
+  &.${selectedName} {
+    background-color: var(--ca-state-selected);
   }
 
   &.${disabledName} {
@@ -99,7 +105,7 @@ const primaryStyle = css`
 `;
 
 const secondaryStyle = css`
-  background: var(--ca-border-secondary);
+  background: var(--ca-border-subtle);
 `;
 
 

@@ -8,7 +8,7 @@ const rootStyle = css`
 `;
 
 const style = css`
-  border: 1px solid #E0E0E0;
+  border: var(--ca-border-width) solid var(--ca-border-subtle);
 `;
 
 export default function CalendarEx() {

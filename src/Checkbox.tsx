@@ -11,16 +11,18 @@ export const checkboxStyles = css`
   input {
     cursor: pointer;
     margin-right: 0;
+
+    accent-color: var(--ca-interactive);
   }
 
   label {
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 var(--ca-space-2);
     cursor: pointer;
   }
 `;
 
 export const checkboxDisabledStyles = css`
-  color: #BBBBBB;
+  color: var(--ca-text-disabled);
 `;
 
 
@@ -73,8 +75,8 @@ const svgCheckboxStyle = css`
 `;
 
 const borderStyle = css`
-  border: 1px solid #CCC;
-  border-radius: 4px;
+  border: var(--ca-border-width) solid var(--ca-border);
+  border-radius: var(--ca-radius-md);
 `;
 
 const selectedStyle = css`

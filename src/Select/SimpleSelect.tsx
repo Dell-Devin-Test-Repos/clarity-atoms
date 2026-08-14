@@ -2,7 +2,6 @@ import { css, cx } from '@emotion/css';
 import { ComponentChildren } from 'preact';
 
 import { Button } from '../Button';
-import { border, primary } from '../color';
 import { SVGIcon } from '../icons/SVGIcon';
 import { ListItem } from '../List/ListItem';
 import { Surface } from '../surface/Surface';
@@ -37,15 +36,22 @@ const anchorStyle = css`
   justify-content: flex-start;
   align-items: center;
 
-  line-height: 1;
-  border: 1px solid ${border};
+  line-height: var(--ca-line-height-tight);
+  border: var(--ca-border-width) solid var(--ca-border);
   outline: none;
+
+  background: var(--ca-surface);
+  color: var(--ca-text-primary);
 
   cursor: pointer;
 
+  &:hover {
+    border-color: var(--ca-border-strong);
+  }
+
   &.focused,
   &:focus {
-    border-color: ${primary};
+    border-color: var(--ca-interactive);
   }
 `;
 
@@ -65,18 +71,18 @@ const contentStyle = css`
 const placeholderStyle = css`
   margin-right: auto;
 
-  color: #ABABAB;
+  color: var(--ca-text-secondary);
 `;
 
 const closeButtonStyle = css`
   margin-left: 1rem;
 
-  border: 1px solid transparent;
+  border: var(--ca-border-width) solid transparent;
 
   outline: none;
 
   &:focus {
-    border-color: ${primary};
+    border-color: var(--ca-interactive);
   }
 `;
 
@@ -85,7 +91,7 @@ const closeStyle = css`
   height: 1.125rem;
   min-width: 1.125rem;
 
-  fill: #444444;
+  fill: var(--ca-text-primary);
 `;
 
 const chevStyle = css`
@@ -96,7 +102,7 @@ const chevStyle = css`
 
   transform: rotateZ(180deg);
 
-  fill: #ABABAB;
+  fill: var(--ca-text-secondary);
 `;
 
 

@@ -1,10 +1,10 @@
 import { css } from '@emotion/css';
 
 import { Button } from '../../src/Button';
-import { primary } from '../../src/color';
 import { SVGIcon } from '../../src/icons/SVGIcon';
 
 import { ClarityAtomsLogo } from '../components/Logo';
+import { ThemeSwitcher } from '../components/ThemeSwitcher';
 
 
 export interface AppHeaderProps {
@@ -22,8 +22,8 @@ const rootStyle = css`
 
   /* line-height: normal; */
 
-  background-color: ${primary};
-  color: #FFFFFF;
+  background-color: var(--ca-interactive);
+  color: var(--ca-text-on-interactive);
 
   @media (min-width: 540px) {
     justify-content: flex-start;
@@ -37,7 +37,7 @@ const menuButtonStyle = css`
 
   align-self: center;
 
-  border: 1px solid rgba(255, 255,255, 0.1);
+  border: var(--ca-border-width) solid currentColor;
 
   @media (min-width: 768px) {
     display: none;
@@ -69,7 +69,7 @@ const navLinkStyle = css`
 
   cursor: pointer;
 
-  color: #FFFFFF;
+  color: inherit;
   text-decoration: none;
 `;
 
@@ -111,19 +111,25 @@ const githubLinkStyle = css`
 
   align-items: center;
 
-  transition: all 80ms ease-out;
+  transition: all var(--ca-duration-instant) var(--ca-easing-standard);
 
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #FFFFFF;
+  border: var(--ca-border-width) solid currentColor;
+  background-color: transparent;
+  color: inherit;
   text-decoration: none;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--ca-interactive-hover);
   }
 
   @media (min-width: 540px) {
-    margin-left: auto;
     padding: 0 1rem;
+  }
+`;
+
+const switcherStyle = css`
+  @media (min-width: 540px) {
+    margin-left: auto;
   }
 `;
 
@@ -159,6 +165,7 @@ export function AppHeader(props: AppHeaderProps) {
         </a>
       </h1>
       <div class={taglineStyle}>Sensible components for Enterprise Apps</div>
+      <ThemeSwitcher class={switcherStyle} />
       <a class={githubLinkStyle} href='https://github.com/dell/clarity-atoms' target='_blank'>
         <SVGIcon class={githubIconStyle} name='github' />
         <span class={githubTextStyle}>GitHub</span>

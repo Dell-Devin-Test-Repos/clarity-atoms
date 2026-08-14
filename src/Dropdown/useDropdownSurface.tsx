@@ -5,7 +5,6 @@ import { filter, map } from 'rxjs/operators';
 import styler from 'stylefire';
 
 
-import { borderSecondary } from '../color';
 import { useSurface, UseSurfaceHook } from '../surface/Surface';
 
 import { getRect$, makeAnimation$, makePlacement } from './strategy';
@@ -22,9 +21,10 @@ const dropdownStyle = css`
 
   flex-direction: column;
 
-  background: #FFFFFF;
-  border: 1px solid ${borderSecondary};
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.12);
+  background: var(--ca-surface-raised);
+  color: var(--ca-text-primary);
+  border: var(--ca-border-width) solid var(--ca-border-subtle);
+  box-shadow: var(--ca-elevation-1);
   outline: none;
 
   overflow: auto;

@@ -1,0 +1,155 @@
+import { TokenTable } from './TokenTable';
+
+# Design Tokens
+
+Every themeable value in Clarity Atoms is a **token**. Tokens are declared once as
+plain data (`src/theme/tokens.ts`), assembled into themes (`src/theme/themes.ts`)
+and emitted as `--ca-*` CSS custom properties. Components only ever reference the
+custom properties, so a theme change never re-renders the component tree.
+
+> Never hardcode a Clarity colour in a component. If a value should change with the
+> theme, it belongs in the token layer.
+
+## Applying a theme
+
+```ts
+import { installThemes, setTheme } from 'clarity-atoms/theme';
+
+// Emit the custom properties for light, dark and high-contrast themes.
+installThemes();
+
+// Apply one. 'auto' follows the OS `prefers-color-scheme` setting.
+setTheme('dark');
+```
+
+`setTheme()` writes `data-ca-theme` on `<html>` (or on any element you pass as the
+second argument), and each theme's tokens are scoped to that attribute. Because the
+tokens cascade, portals, dialogs and dropdowns are themed too - and scoping to a
+subtree lets a single page render two themes at once:
+
+```tsx
+<section data-ca-theme='dark'>
+  <Button variant='solid'>Always dark</Button>
+</section>
+```
+
+Preact code can observe or change the active theme with the `useTheme()` hook:
+
+```tsx
+const { preference, theme, setTheme } = useTheme();
+```
+
+`preference` is what was asked for (possibly `auto`), `theme` is what is rendered
+after resolving `auto` against `prefers-color-scheme`.
+
+## Themes
+
+| Theme           | Attribute value            | Notes                                            |
+| --------------- | -------------------------- | ------------------------------------------------ |
+| Light           | `data-ca-theme='light'`    | Default, also emitted on `:root`                 |
+| Dark            | `data-ca-theme='dark'`     | Dark surfaces, lighter brand ramp steps          |
+| High contrast   | `data-ca-theme='high-contrast'` | Black surfaces, white borders, yellow focus ring |
+| Auto            | `data-ca-theme='auto'`     | Light, switching to dark via `prefers-color-scheme` |
+
+Use the switcher in the site header to view any page in all three themes.
+
+## Palette ramps
+
+Shades are **not** derived per component. A single 10 step ramp
+(`50` … `900`) is generated from each base colour with `makeRamp()`, and themes pick
+steps from it:
+
+```ts
+import { makeRamp } from 'clarity-atoms/theme';
+
+const brand = makeRamp('#0076CE');
+
+brand[500]; // base
+brand[600]; // one step darker - used for `interactive-hover` in light themes
+brand[300]; // lighter - used for `interactive` in the dark theme
+```
+
+## Token reference
+
+Values below are read from the live theme, so they change with the switcher.
+
+### Colour - surfaces and text
+
+<TokenTable group='surface' />
+<TokenTable group='text' />
+
+### Colour - borders and interactive
+
+<TokenTable group='border' />
+<TokenTable group='interactive' />
+
+### Colour - states and feedback
+
+<TokenTable group='state' />
+<TokenTable group='feedback' />
+
+### Spacing, radius and sizing
+
+<TokenTable group='space' />
+<TokenTable group='radius' />
+<TokenTable group='control' />
+
+### Typography
+
+<TokenTable group='font' />
+<TokenTable group='line-height' />
+
+### Elevation and motion
+
+<TokenTable group='elevation' />
+<TokenTable group='duration' />
+<TokenTable group='easing' />
+
+## Migrating from `setupTheme()`
+
+`setupTheme()` still works and is now a shim: the six legacy fields are mapped onto
+tokens, the result replaces the `light` theme, and the deprecated `--ca-*` names are
+emitted as aliases of the new tokens.
+
+| Legacy field / property | Replacement token                       |
+| ----------------------- | --------------------------------------- |
+| `primary`               | `interactive` / `interactive-text`      |
+| `primaryComp`           | `text-on-interactive`                   |
+| `border`                | `border`                                |
+| `borderLight`           | `border-subtle`                         |
+| `disabled`              | `state-disabled`                        |
+| `disabledLight`         | `state-disabled-subtle`                 |
+| `--ca-primary-semilight`| `--ca-interactive-hover`                |
+| `--ca-primary-light`    | `--ca-interactive-active`               |
+| `--ca-button-hover`     | `--ca-state-hover`                      |
+| `--ca-button-focus`     | `--ca-state-focus`                      |
+| `--ca-border-hover`     | `--ca-border-strong`                    |
+
+To migrate:
+
+1. Replace `setupTheme(theme)` with `installThemes()` (optionally passing your own
+   token sets) followed by `setTheme('light' | 'dark' | 'high-contrast' | 'auto')`.
+2. Replace deprecated `--ca-*` names in application CSS with the tokens above.
+3. Replace imports from `clarity-atoms/color` with `var(--ca-*)` values.
+
+## Accessibility
+
+Text and interactive state colours in all three themes meet WCAG 2.1 AA contrast
+(4.5:1 for body text, 3:1 for large text and UI borders). Disabled states are
+deliberately low contrast, which WCAG exempts. The contrast helper used to check
+this ships with the library:
+
+```ts
+import { contrast } from 'clarity-atoms/theme';
+
+contrast('#0076CE', '#FFFFFF'); // 4.68
+```
+
+`scripts/contrast-audit.ts` prints the full matrix for every theme and exits
+non-zero on a regression:
+
+```sh
+npx tsc scripts/contrast-audit.ts --module commonjs --target es2019 \
+  --moduleResolution node --esModuleInterop --skipLibCheck --outDir .audit-out
+node .audit-out/scripts/contrast-audit.js
+```
