@@ -51,7 +51,16 @@ export function tokensToDeclarations(tokens: TokenSet, indent = '  '): string {
 }
 
 
-/** Render a token set as a CSS rule for the given selector. */
-export function tokensToRule(selector: string, tokens: TokenSet): string {
-  return `${selector} {\n${tokensToDeclarations(tokens)}\n}`;
+/**
+ * Render a token set as a CSS rule for the given selector. `extras` are plain
+ * declarations emitted alongside the custom properties, e.g. `color-scheme`.
+ */
+export function tokensToRule(selector: string, tokens: TokenSet, extras: string[] = []): string {
+
+  const body = [
+    tokensToDeclarations(tokens),
+    ...extras.map((x) => `  ${x};`)
+  ].join('\n');
+
+  return `${selector} {\n${body}\n}`;
 }

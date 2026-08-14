@@ -84,6 +84,11 @@ const flat = css`
     background: var(--ca-state-focus);
   }
 
+  &:focus-visible {
+    outline: var(--ca-focus-ring-width) solid var(--ca-state-focus-ring);
+    outline-offset: var(--ca-focus-ring-width);
+  }
+
   &:active {
     background: var(--ca-state-active);
   }
@@ -112,6 +117,11 @@ const outline = css`
     border-color: var(--ca-interactive);
   }
 
+  &:focus-visible {
+    outline: var(--ca-focus-ring-width) solid var(--ca-state-focus-ring);
+    outline-offset: var(--ca-focus-ring-width);
+  }
+
   &:active {
     background: var(--ca-state-active);
     border-color: var(--ca-interactive-active);
@@ -138,6 +148,9 @@ const solid = css`
 
   &:focus {
     background-color: var(--ca-interactive-hover);
+  }
+
+  &:focus-visible {
     outline: var(--ca-focus-ring-width) solid var(--ca-state-focus-ring);
     outline-offset: var(--ca-focus-ring-width);
   }

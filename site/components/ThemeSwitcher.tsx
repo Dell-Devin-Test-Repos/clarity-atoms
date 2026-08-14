@@ -56,6 +56,11 @@ const buttonStyle = css`
   &:hover {
     background: var(--ca-interactive-hover);
   }
+
+  &:focus-visible {
+    outline: var(--ca-focus-ring-width) solid var(--ca-state-focus-ring);
+    outline-offset: var(--ca-focus-ring-width);
+  }
 `;
 
 const selectedStyle = css`

@@ -2,6 +2,7 @@ import { injectGlobal } from '@emotion/css';
 import { BehaviorSubject } from 'rxjs';
 
 import { tokensToRule } from './css';
+import { luminance } from './palette';
 import { darkTheme, highContrastTheme, lightTheme, ThemeName, ThemePreference, themes } from './themes';
 import { TokenSet } from './tokens';
 
@@ -35,6 +36,16 @@ function selectorFor(name: ThemeName): string {
 
 
 /**
+ * Declarations emitted next to the custom properties. `color-scheme` is derived
+ * from the surface, so browser-painted UI (scrollbars, form controls) matches a
+ * dark theme without every theme having to state it.
+ */
+function extrasFor(tokens: TokenSet): string[] {
+  return [`color-scheme: ${luminance(tokens['surface']) < 0.5 ? 'dark' : 'light'}`];
+}
+
+
+/**
  * Inject the `--ca-*` custom properties for every theme.
  *
  * Tokens are emitted once per theme and scoped to `[data-ca-theme]`, so any
@@ -49,14 +60,14 @@ export function installThemes(options: InstallThemesOptions = {}) {
   const defaultTokens = resolved[defaultName];
 
   const rules = [
-    tokensToRule(`:root, ${selectorFor(defaultName)}`, defaultTokens),
+    tokensToRule(`:root, ${selectorFor(defaultName)}`, defaultTokens, extrasFor(defaultTokens)),
     ...(Object.keys(resolved) as ThemeName[])
       .filter((name) => name !== defaultName)
-      .map((name) => tokensToRule(selectorFor(name), resolved[name])),
+      .map((name) => tokensToRule(selectorFor(name), resolved[name], extrasFor(resolved[name]))),
 
     // `auto` follows the OS setting without any scripting.
-    tokensToRule(`[${themeAttribute}='auto']`, defaultTokens),
-    `@media ${darkQuery} {\n${tokensToRule(`[${themeAttribute}='auto']`, resolved.dark)}\n}`
+    tokensToRule(`[${themeAttribute}='auto']`, defaultTokens, extrasFor(defaultTokens)),
+    `@media ${darkQuery} {\n${tokensToRule(`[${themeAttribute}='auto']`, resolved.dark, extrasFor(resolved.dark))}\n}`
   ];
 
   injectGlobal`${rules.join('\n\n')}`;
